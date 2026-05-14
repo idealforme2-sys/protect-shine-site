@@ -27,8 +27,8 @@ function initPreloader() {
   const preloader = document.querySelector("[data-preloader]");
   const hide = () => preloader?.classList.add("is-hidden");
 
-  window.addEventListener("load", () => window.setTimeout(hide, 650), { once: true });
-  window.setTimeout(hide, 1800);
+  window.addEventListener("load", () => window.setTimeout(hide, 1250), { once: true });
+  window.setTimeout(hide, 2800);
 }
 
 function initHeader() {

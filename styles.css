@@ -15,6 +15,7 @@
   --red-strong: #ff1e35;
   --gold: #f0c479;
   --shadow: 0 28px 90px rgba(0, 0, 0, 0.45);
+  --siren-rail: linear-gradient(90deg, var(--blue) 0%, rgba(255, 255, 255, 0.88) 16.66%, var(--red) 33.33%, rgba(255, 255, 255, 0.88) 50%, var(--blue) 66.66%, rgba(255, 255, 255, 0.88) 83.33%, var(--red) 100%);
   --font-display: "Bebas Neue", Impact, sans-serif;
   --font-body: "Rajdhani", "Arial Narrow", sans-serif;
 }
@@ -171,8 +172,8 @@ ul {
   position: absolute;
   inset: 0 0 auto;
   height: 5px;
-  background: linear-gradient(90deg, var(--blue), rgba(255, 255, 255, 0.75), var(--red));
-  animation: loaderScan 1.6s ease-in-out infinite;
+  background: linear-gradient(90deg, transparent 0%, var(--blue) 20%, rgba(255, 255, 255, 0.82) 50%, var(--red) 80%, transparent 100%);
+  animation: loaderRailPulse 1.6s ease-in-out infinite;
 }
 
 .preloader-lights {
@@ -326,6 +327,7 @@ ul {
 }
 
 .site-nav a {
+  position: relative;
   color: var(--muted);
   font-size: 0.8rem;
   font-weight: 900;
@@ -337,6 +339,40 @@ ul {
 .site-nav a:hover {
   color: var(--text);
   transform: translateY(-2px);
+}
+
+.site-nav a:not(.nav-social):not(.nav-cta) {
+  padding: 8px 0;
+}
+
+.site-nav a:not(.nav-social):not(.nav-cta)::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 1px;
+  height: 3px;
+  border-radius: 999px;
+  background: var(--siren-rail);
+  background-size: 200% 100%;
+  opacity: 0;
+  box-shadow:
+    0 0 14px rgba(97, 183, 255, 0.28),
+    0 0 14px rgba(255, 77, 77, 0.24);
+  transform: scaleX(0.42);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.site-nav a:not(.nav-social):not(.nav-cta):hover {
+  text-shadow:
+    0 0 14px rgba(97, 183, 255, 0.28),
+    0 0 14px rgba(255, 77, 77, 0.24);
+}
+
+.site-nav a:not(.nav-social):not(.nav-cta):hover::after {
+  opacity: 1;
+  transform: scaleX(1);
+  animation: policeSiren 3.4s linear infinite;
 }
 
 .nav-social,
@@ -619,13 +655,18 @@ ul {
 
 .signal-strip {
   overflow: hidden;
-  width: 106vw;
-  margin: -3px 0 20px -3vw;
+  width: 100%;
+  margin: 0 0 18px;
   padding: 12px 0;
-  border-block: 1px solid rgba(255, 255, 255, 0.08);
-  background: linear-gradient(90deg, rgba(97, 183, 255, 0.2), rgba(255, 77, 77, 0.2));
-  transform: rotate(0.55deg);
-  transform-origin: center;
+  border-block: 1px solid rgba(255, 255, 255, 0.1);
+  background:
+    linear-gradient(90deg, rgba(97, 183, 255, 0.24), rgba(255, 255, 255, 0.06) 50%, rgba(255, 77, 77, 0.24)),
+    rgba(3, 5, 11, 0.94);
+  box-shadow:
+    inset 0 1px 0 rgba(97, 183, 255, 0.3),
+    inset 0 -1px 0 rgba(255, 77, 77, 0.25),
+    0 0 32px rgba(97, 183, 255, 0.1),
+    0 0 32px rgba(255, 77, 77, 0.08);
 }
 
 .signal-track {
@@ -633,7 +674,7 @@ ul {
   gap: 0;
   width: max-content;
   min-width: max-content;
-  background: rgba(3, 5, 11, 0.92);
+  background: rgba(3, 5, 11, 0.86);
   will-change: transform;
   animation: signalMove 24s linear infinite;
 }
@@ -656,10 +697,14 @@ ul {
 .signal-group span::after {
   content: "";
   display: inline-block;
-  width: 9px;
-  height: 9px;
+  width: 24px;
+  height: 7px;
   margin-left: 30px;
-  background: linear-gradient(180deg, var(--blue), var(--red));
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--blue), rgba(255, 255, 255, 0.82), var(--red));
+  box-shadow:
+    0 0 16px rgba(97, 183, 255, 0.34),
+    0 0 16px rgba(255, 77, 77, 0.28);
   vertical-align: middle;
 }
 
@@ -752,10 +797,17 @@ ul {
 .service-card::after {
   content: "";
   position: absolute;
-  inset: auto 18px 70px;
+  inset: auto 24px 17px;
   z-index: 1;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(240, 196, 121, 0.7), transparent);
+  height: 4px;
+  border-radius: 999px;
+  background:
+    var(--siren-rail),
+    linear-gradient(90deg, var(--blue), var(--red));
+  background-size: 200% 100%, 100% 100%;
+  box-shadow:
+    0 0 18px rgba(97, 183, 255, 0.26),
+    0 0 18px rgba(255, 77, 77, 0.2);
   opacity: 0;
   transition: opacity 220ms ease, transform 220ms ease;
 }
@@ -770,7 +822,7 @@ ul {
 
 .service-card:hover::after {
   opacity: 1;
-  transform: translateY(-6px);
+  animation: policeSiren 3.4s linear infinite;
 }
 
 .service-card:hover img {
@@ -812,6 +864,7 @@ ul {
     linear-gradient(290deg, rgba(255, 77, 77, 0.14), transparent 34%),
     rgba(5, 8, 15, 0.82);
   box-shadow: var(--shadow);
+  transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
 }
 
 .service-promise::before {
@@ -820,6 +873,14 @@ ul {
   inset: 0 0 auto;
   height: 5px;
   background: linear-gradient(90deg, var(--blue), rgba(255, 255, 255, 0.42), var(--red));
+}
+
+.service-promise:hover {
+  border-color: rgba(255, 255, 255, 0.24);
+  box-shadow:
+    var(--shadow),
+    0 0 36px rgba(97, 183, 255, 0.12),
+    0 0 36px rgba(255, 77, 77, 0.1);
 }
 
 .promise-intro {
@@ -855,6 +916,16 @@ ul {
     linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.035)),
     rgba(0, 0, 0, 0.1);
   box-shadow: 0 16px 45px rgba(0, 0, 0, 0.26);
+  transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+}
+
+.service-promise article:hover {
+  border-color: rgba(255, 255, 255, 0.24);
+  box-shadow:
+    0 20px 58px rgba(0, 0, 0, 0.38),
+    0 0 24px rgba(97, 183, 255, 0.1),
+    0 0 24px rgba(255, 77, 77, 0.08);
+  transform: translateY(-4px);
 }
 
 .service-promise article span {
@@ -883,11 +954,30 @@ ul {
   z-index: 1;
   min-height: 100%;
   padding: 24px;
+  overflow: hidden;
   border: 1px solid rgba(240, 196, 121, 0.26);
   border-radius: 24px 8px 24px 8px;
   background:
     linear-gradient(180deg, rgba(240, 196, 121, 0.14), transparent 38%),
     rgba(255, 255, 255, 0.055);
+  transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+}
+
+.promise-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 4px;
+  background: linear-gradient(90deg, var(--blue), rgba(255, 255, 255, 0.34), var(--red));
+}
+
+.promise-panel:hover {
+  border-color: rgba(255, 255, 255, 0.24);
+  box-shadow:
+    0 20px 58px rgba(0, 0, 0, 0.36),
+    0 0 24px rgba(97, 183, 255, 0.1),
+    0 0 24px rgba(255, 77, 77, 0.08);
+  transform: translateY(-4px);
 }
 
 .promise-panel span {
@@ -1102,6 +1192,25 @@ a.showcase-card {
   transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
 }
 
+.quote-card,
+.testimonial-stack article,
+.map-notes article,
+.truck-service-grid article {
+  transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+}
+
+.quote-card:hover,
+.testimonial-stack article:hover,
+.map-notes article:hover,
+.truck-service-grid article:hover {
+  border-color: rgba(255, 255, 255, 0.24);
+  box-shadow:
+    0 22px 66px rgba(0, 0, 0, 0.42),
+    0 0 28px rgba(97, 183, 255, 0.1),
+    0 0 28px rgba(255, 77, 77, 0.08);
+  transform: translateY(-4px);
+}
+
 .package-card:hover {
   border-color: rgba(255, 255, 255, 0.28);
   box-shadow:
@@ -1111,27 +1220,24 @@ a.showcase-card {
   transform: translateY(-5px);
 }
 
-.package-card:hover::before {
+.package-card:hover::before,
+.quote-card:hover::before,
+.testimonial-stack article:hover::before,
+.map-notes article:hover::before,
+.truck-service-grid article:hover::before,
+.service-promise:hover::before,
+.service-promise article:hover::before,
+.promise-panel:hover::before {
   height: 5px;
   background:
-    linear-gradient(
-      90deg,
-      rgba(97, 183, 255, 0.05) 0%,
-      rgba(97, 183, 255, 0.8) 18%,
-      rgba(255, 255, 255, 0.92) 30%,
-      rgba(255, 77, 77, 0.78) 44%,
-      rgba(255, 77, 77, 0.08) 58%,
-      rgba(97, 183, 255, 0.72) 75%,
-      rgba(255, 255, 255, 0.84) 88%,
-      rgba(97, 183, 255, 0.05) 100%
-    ),
+    var(--siren-rail),
     linear-gradient(
     90deg,
     var(--blue),
     var(--red)
   );
-  background-size: 260% 100%, 100% 100%;
-  animation: policeSiren 2.8s linear infinite;
+  background-size: 200% 100%, 100% 100%;
+  animation: policeSiren 3.4s linear infinite;
   box-shadow:
     0 0 22px rgba(97, 183, 255, 0.3),
     0 0 22px rgba(255, 77, 77, 0.22);
@@ -1177,7 +1283,7 @@ a.showcase-card {
 .truck-service-grid ul,
 .why-panel ul {
   display: grid;
-  gap: 10px;
+  gap: 8px;
 }
 
 .package-card li,
@@ -1186,7 +1292,7 @@ a.showcase-card {
   position: relative;
   padding-left: 18px;
   color: var(--text);
-  line-height: 1.55;
+  line-height: 1.48;
 }
 
 .package-card li::before,
@@ -1217,17 +1323,17 @@ a.showcase-card {
 
 .finish-section {
   display: grid;
-  grid-template-columns: minmax(260px, 0.64fr) minmax(0, 1.36fr);
-  gap: 20px;
+  grid-template-columns: minmax(220px, 0.48fr) minmax(0, 1.52fr);
+  gap: 16px;
   align-items: start;
-  padding-block: 78px;
+  padding-block: 54px;
 }
 
 .finish-media {
   position: sticky;
   top: 96px;
   overflow: hidden;
-  min-height: 420px;
+  min-height: 330px;
   align-self: start;
   border: 1px solid var(--line);
   border-radius: 28px 8px 28px 8px;
@@ -1238,24 +1344,35 @@ a.showcase-card {
 .finish-media video {
   width: 100%;
   height: 100%;
-  min-height: 420px;
+  min-height: 330px;
   object-fit: cover;
 }
 
 .finish-copy h2 {
-  max-width: 780px;
-  margin-bottom: 12px;
-  font-size: clamp(2.3rem, 4.8vw, 4.5rem);
+  max-width: 700px;
+  margin-bottom: 10px;
+  font-size: clamp(2rem, 4.1vw, 3.75rem);
+}
+
+.finish-copy > p {
+  max-width: 920px;
+  margin-bottom: 0;
+  line-height: 1.55;
 }
 
 .truck-service-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-  margin-top: 20px;
+  gap: 10px;
+  margin-top: 16px;
 }
 
 .truck-service-grid article {
-  padding: 19px;
+  padding: 15px;
+}
+
+.truck-service-grid article h3 {
+  margin-bottom: 8px;
+  font-size: 1.12rem;
 }
 
 .finish-list,
@@ -1267,16 +1384,17 @@ a.showcase-card {
 }
 
 .finish-list {
-  margin-top: 24px;
+  gap: 8px;
+  margin-top: 14px;
 }
 
 .finish-list span,
 .area-facts span,
 .quote-tags span {
   display: inline-flex;
-  min-height: 40px;
+  min-height: 34px;
   align-items: center;
-  padding: 0 14px;
+  padding: 0 12px;
   border: 1px solid var(--line);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.045);
@@ -1816,20 +1934,24 @@ a.showcase-card {
   }
 
   to {
-    background-position: 260% 50%;
+    background-position: 200% 50%;
   }
 }
 
-@keyframes loaderScan {
+@keyframes loaderRailPulse {
   0%,
   100% {
-    opacity: 0.72;
-    transform: translateX(-18%);
+    opacity: 0.68;
+    box-shadow:
+      0 0 18px rgba(97, 183, 255, 0.22),
+      0 0 18px rgba(255, 77, 77, 0.18);
   }
 
   50% {
     opacity: 1;
-    transform: translateX(18%);
+    box-shadow:
+      0 0 26px rgba(97, 183, 255, 0.36),
+      0 0 26px rgba(255, 77, 77, 0.32);
   }
 }
 
@@ -1951,12 +2073,12 @@ a.showcase-card {
   .finish-media {
     position: relative;
     top: auto;
-    min-height: 380px;
+    min-height: 300px;
   }
 
   .finish-media img,
   .finish-media video {
-    min-height: 380px;
+    min-height: 300px;
   }
 }
 
