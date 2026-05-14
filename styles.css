@@ -913,7 +913,7 @@ ul {
 }
 
 .packages {
-  padding-block: 46px 42px;
+  padding-block: 62px 56px;
 }
 
 .section-heading {
@@ -1230,7 +1230,7 @@ ul {
 
 .showcase-inner {
   width: min(1380px, calc(100% - 32px));
-  padding-block: 72px 34px;
+  padding-block: 84px 50px;
 }
 
 .showcase-grid {
@@ -1581,7 +1581,7 @@ a.showcase-card {
   grid-template-columns: minmax(220px, 0.48fr) minmax(0, 1.52fr);
   gap: 16px;
   align-items: start;
-  padding-block: 42px;
+  padding-block: 56px;
 }
 
 .finish-media {
