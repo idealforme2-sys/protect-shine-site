@@ -112,8 +112,26 @@ function accentHeadlineElement(element) {
 function initHeadlineAccents() {
   document
     .querySelectorAll(
-      ".brand-mark strong, #hero-title > span, main section h2, main section h3, .quote-card h3, .hero-badge-card h2"
-        + ", .preloader strong, .promise-panel strong, .showcase-copy > span, .testimonial-stack small, .footer-brand p"
+      [
+        ".brand-mark strong",
+        "#hero-title > span",
+        "main section h2",
+        ".service-card h3",
+        ".service-promise article h3",
+        ".promise-panel span",
+        ".promise-panel strong",
+        ".showcase-copy > span",
+        ".showcase-copy h3",
+        ".package-card h3",
+        ".truck-service-grid h3",
+        ".trust-card h3",
+        ".map-notes h3",
+        ".quote-card h3",
+        ".hero-badge-card h2",
+        ".preloader strong",
+        ".testimonial-stack small",
+        ".footer-brand p",
+      ].join(", ")
     )
     .forEach(accentHeadlineElement);
 }

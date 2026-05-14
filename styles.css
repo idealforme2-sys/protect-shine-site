@@ -1851,6 +1851,11 @@ a.showcase-card {
 }
 
 .showcase-copy span.headline-accented,
+.showcase-copy h3.headline-accented,
+.service-promise article h3.headline-accented,
+.promise-panel span.headline-accented,
+.promise-panel strong.headline-accented,
+.package-card h3.headline-accented,
 .map-notes h3.headline-accented,
 .trust-card h3.headline-accented,
 .truck-service-grid h3.headline-accented,
