@@ -384,7 +384,7 @@ function initGsapAnimations() {
 
 function initReveal() {
   const items = document.querySelectorAll(
-    ".section-kicker, .section-heading, .service-card, .service-promise, .service-promise article, .showcase-card, .package-card, .finish-media, .finish-copy, .trust-intro, .trust-card, .quote-copy, .testimonial-stack article, .quote-card, .map-frame, .map-copy, .map-notes article, .faq-item"
+    ".section-kicker, .section-heading, .service-card, .service-promise, .service-promise article, .finish-media, .finish-copy, .trust-intro, .trust-card, .quote-copy, .testimonial-stack article, .quote-card, .map-frame, .map-copy, .map-notes article, .faq-item"
   );
 
   if (!("IntersectionObserver" in window) || reducedMotion()) {
