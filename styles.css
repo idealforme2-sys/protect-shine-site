@@ -15,10 +15,16 @@
   --red-strong: #ff1e35;
   --gold: #f0c479;
   --shadow: 0 28px 90px rgba(0, 0, 0, 0.45);
-  --siren-rail: repeating-linear-gradient(90deg, var(--blue) 0 48px, rgba(255, 255, 255, 0.9) 48px 60px, var(--red) 60px 108px, rgba(255, 255, 255, 0.9) 108px 120px);
-  --siren-size: 240px 100%;
+  --siren-rail: linear-gradient(90deg, rgba(97, 183, 255, 0.08) 0%, rgba(97, 183, 255, 0.82) 11%, rgba(255, 255, 255, 0.9) 22%, rgba(255, 77, 77, 0.82) 33%, rgba(255, 77, 77, 0.08) 44%, rgba(97, 183, 255, 0.08) 50%, rgba(97, 183, 255, 0.82) 61%, rgba(255, 255, 255, 0.9) 72%, rgba(255, 77, 77, 0.82) 83%, rgba(255, 77, 77, 0.08) 94%, rgba(97, 183, 255, 0.08) 100%);
+  --siren-size: 200% 100%;
   --font-display: "Bebas Neue", Impact, sans-serif;
   --font-body: "Rajdhani", "Arial Narrow", sans-serif;
+}
+
+@property --siren-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
 }
 
 *,
@@ -161,6 +167,16 @@ h2 {
   margin-bottom: 16px;
   font-size: clamp(2.4rem, 6vw, 5.3rem);
   line-height: 0.88;
+}
+
+main section h2 {
+  background: linear-gradient(92deg, var(--text) 0%, var(--text) 58%, var(--blue) 76%, var(--red) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow:
+    0 0 22px rgba(97, 183, 255, 0.06),
+    0 0 22px rgba(255, 77, 77, 0.05);
 }
 
 h3 {
@@ -886,8 +902,8 @@ ul {
   z-index: 4;
   padding: 2px;
   border-radius: inherit;
-  background: var(--siren-rail);
-  background-size: var(--siren-size);
+  background: conic-gradient(from var(--siren-angle, 0deg), rgba(97, 183, 255, 0.12), var(--blue), rgba(255, 255, 255, 0.9), var(--red), rgba(255, 77, 77, 0.1), var(--blue), rgba(97, 183, 255, 0.12));
+  background-size: 100% 100%;
   box-shadow:
     0 0 24px rgba(97, 183, 255, 0.2),
     0 0 24px rgba(255, 77, 77, 0.16);
@@ -910,7 +926,7 @@ ul {
 
 .service-card:hover::after {
   opacity: 1;
-  animation: policeSiren 4.2s linear infinite;
+  animation: serviceFrameSiren 4.8s linear infinite;
 }
 
 .service-card:hover img {
@@ -1336,8 +1352,39 @@ a.showcase-card {
 .package-card.featured {
   border-color: rgba(97, 183, 255, 0.34);
   background:
+    linear-gradient(145deg, rgba(97, 183, 255, 0.14), transparent 32%),
+    linear-gradient(315deg, rgba(255, 77, 77, 0.12), transparent 34%),
     radial-gradient(circle at top left, rgba(97, 183, 255, 0.16), transparent 34%),
     linear-gradient(145deg, rgba(255, 255, 255, 0.105), rgba(255, 255, 255, 0.035));
+  box-shadow:
+    0 30px 90px rgba(0, 0, 0, 0.48),
+    0 0 42px rgba(97, 183, 255, 0.14),
+    0 0 34px rgba(255, 77, 77, 0.1);
+}
+
+.package-card.featured::after {
+  content: "Priority Pick";
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  z-index: 3;
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 12px;
+  border: 1px solid rgba(240, 196, 121, 0.32);
+  border-radius: 999px;
+  background:
+    linear-gradient(120deg, rgba(97, 183, 255, 0.24), rgba(255, 77, 77, 0.2)),
+    rgba(5, 8, 15, 0.82);
+  color: var(--text);
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  box-shadow:
+    0 0 20px rgba(97, 183, 255, 0.16),
+    0 0 20px rgba(255, 77, 77, 0.12);
 }
 
 .package-tagline {
@@ -1505,15 +1552,42 @@ a.showcase-card {
 }
 
 .trust-section {
+  position: relative;
+  overflow: hidden;
   align-items: center;
-  padding-block: 88px;
+  padding: 48px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 30px 8px 30px 8px;
+  background:
+    linear-gradient(115deg, rgba(97, 183, 255, 0.12), transparent 34%),
+    linear-gradient(285deg, rgba(255, 77, 77, 0.11), transparent 36%),
+    rgba(5, 8, 15, 0.72);
+  box-shadow:
+    0 28px 90px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(14px);
+}
+
+.trust-section::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 12%;
+  width: 32%;
+  background: linear-gradient(105deg, transparent, rgba(255, 255, 255, 0.09), transparent);
+  opacity: 0.8;
+  transform: skewX(-16deg);
+  pointer-events: none;
 }
 
 .trust-intro {
+  position: relative;
+  z-index: 1;
   padding-right: 24px;
 }
 
 .trust-grid {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
@@ -1782,9 +1856,9 @@ a.showcase-card {
 }
 
 .map-section {
-  grid-template-columns: minmax(0, 0.84fr) minmax(0, 1.16fr);
-  gap: 20px;
-  padding-block: 72px;
+  grid-template-columns: minmax(320px, 0.78fr) minmax(0, 1.22fr);
+  gap: 12px;
+  padding-block: 64px;
   align-items: center;
 }
 
@@ -1819,13 +1893,21 @@ a.showcase-card {
 }
 
 .faq-heading {
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(260px, 390px);
   align-items: end;
-  justify-content: space-between;
   gap: 18px;
-  margin-bottom: 24px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 30px;
+}
+
+.faq-heading .eyebrow {
+  align-self: start;
+}
+
+.faq-heading h2 {
+  justify-self: end;
+  margin-bottom: 0;
+  text-align: right;
 }
 
 .faq-list {
@@ -2088,7 +2170,17 @@ a.showcase-card {
   }
 
   to {
-    background-position: 240px 50%;
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes serviceFrameSiren {
+  from {
+    --siren-angle: 0deg;
+  }
+
+  to {
+    --siren-angle: 360deg;
   }
 }
 
@@ -2329,6 +2421,15 @@ a.showcase-card {
 
   .service-promise {
     padding: 22px;
+  }
+
+  .faq-heading {
+    grid-template-columns: 1fr;
+  }
+
+  .faq-heading h2 {
+    justify-self: start;
+    text-align: left;
   }
 
   .showcase-large,
