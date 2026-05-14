@@ -25,10 +25,85 @@ function syncSelectedPackage(packageName) {
 
 function initPreloader() {
   const preloader = document.querySelector("[data-preloader]");
-  const hide = () => preloader?.classList.add("is-hidden");
+  if (!preloader) return;
 
-  window.addEventListener("load", () => window.setTimeout(hide, 1250), { once: true });
-  window.setTimeout(hide, 2800);
+  const bar = preloader.querySelector("[data-preloader-bar]");
+  const percent = preloader.querySelector("[data-preloader-percent]");
+  let progress = 0;
+  let hidden = false;
+
+  const updateProgress = (value) => {
+    progress = Math.max(progress, Math.min(100, Math.round(value)));
+    bar?.style.setProperty("--preloader-progress", `${progress / 100}`);
+    if (percent) percent.textContent = `${progress}%`;
+  };
+
+  const timer = window.setInterval(() => {
+    if (hidden) return;
+    const next = progress + (progress < 55 ? 7 : progress < 82 ? 4 : 2);
+    updateProgress(Math.min(next, 94));
+  }, 120);
+
+  const hide = () => {
+    if (hidden) return;
+    hidden = true;
+    updateProgress(100);
+    window.clearInterval(timer);
+    window.setTimeout(() => preloader.classList.add("is-hidden"), 260);
+  };
+
+  updateProgress(0);
+  window.addEventListener("load", () => window.setTimeout(hide, 1700), { once: true });
+  window.setTimeout(hide, 3600);
+}
+
+function accentTextNodes(text) {
+  const nodes = [];
+  const tokens = text.match(/\s+|\S+/g) || [];
+  let accentedWords = 0;
+
+  tokens.forEach((token) => {
+    const isWord = /[A-Za-z0-9]/.test(token) && token !== "&";
+
+    if (isWord && accentedWords < 2) {
+      const span = document.createElement("span");
+      span.className = accentedWords === 0 ? "accent-blue" : "accent-red";
+      span.textContent = token;
+      nodes.push(span);
+      accentedWords += 1;
+      return;
+    }
+
+    nodes.push(document.createTextNode(token));
+  });
+
+  return { nodes, accentedWords };
+}
+
+function accentHeadlineElement(element) {
+  if (!element || element.dataset.headlineAccented === "true") return;
+
+  const textNode = Array.from(element.childNodes).find(
+    (node) => node.nodeType === Node.TEXT_NODE && /[A-Za-z0-9]/.test(node.textContent)
+  );
+
+  if (!textNode) return;
+
+  const { nodes, accentedWords } = accentTextNodes(textNode.textContent);
+  if (!accentedWords) return;
+
+  textNode.replaceWith(...nodes);
+  element.dataset.headlineAccented = "true";
+  element.classList.add("headline-accented");
+}
+
+function initHeadlineAccents() {
+  document
+    .querySelectorAll(
+      ".brand-mark strong, #hero-title > span, main section h2, main section h3, .quote-card h3, .hero-badge-card h2"
+        + ", .preloader strong, .promise-panel strong, .faq-item button, .footer-brand p"
+    )
+    .forEach(accentHeadlineElement);
 }
 
 function initHeader() {
@@ -304,6 +379,7 @@ function initReveal() {
 
 initPreloader();
 initHeader();
+initHeadlineAccents();
 initShowcases();
 initPackages();
 initFaq();
