@@ -26,6 +26,9 @@
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
+    <div class="cursor-dot" data-cursor-dot aria-hidden="true"></div>
+    <div class="cursor-ring" data-cursor-ring aria-hidden="true"></div>
+
     <div class="preloader" data-preloader>
       <div class="preloader-panel">
         <div class="preloader-lights" aria-hidden="true">
@@ -104,6 +107,13 @@
               Full-time police officer. Former semi truck driver. Texas CDL holder. Real accountability for personal
               vehicles, owner-operators, and fleets.
             </span>
+            <b class="hero-instagram" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <rect x="4" y="4" width="16" height="16" rx="5"></rect>
+                <circle cx="12" cy="12" r="3.4"></circle>
+                <circle cx="16.7" cy="7.3" r="0.9"></circle>
+              </svg>
+            </b>
           </div>
         </a>
       </section>
@@ -657,10 +667,16 @@
           </svg>
         </a>
       </div>
-      <p class="made-by">Melissa, TX - Mobile vehicle and commercial truck detailing</p>
+      <div class="footer-info" aria-label="Protect and Shine contact details">
+        <span>Melissa, TX</span>
+        <span>McKinney + surrounding routes</span>
+        <a href="tel:9723385781">972-338-5781</a>
+        <a href="#quote">Request Quote</a>
+      </div>
       <a class="footer-social" href="https://www.instagram.com/protectandshinedetailing/" target="_blank" rel="noreferrer">
         @protectandshinedetailing
       </a>
+      <p class="made-by">Mobile vehicle and commercial truck detailing built for cleaner handoffs.</p>
       <p class="footer-credit">Made By <span class="credit-creative">Creative</span> <span class="credit-webflow">Webflow Co.</span></p>
     </footer>
 
@@ -669,6 +685,8 @@
       <a data-sms-link href="#">Text <span data-selected-package-label>Priority Detail</span></a>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <script src="./script.js"></script>
   </body>
 </html>

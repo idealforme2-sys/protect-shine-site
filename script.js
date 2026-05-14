@@ -183,6 +183,100 @@ function initQuoteForm() {
   });
 }
 
+function initCustomCursor() {
+  if (!window.matchMedia("(pointer: fine)").matches || reducedMotion()) return;
+
+  const dot = document.querySelector("[data-cursor-dot]");
+  const ring = document.querySelector("[data-cursor-ring]");
+  if (!dot || !ring) return;
+
+  const gsapApi = window.gsap;
+  if (gsapApi) {
+    gsapApi.set([dot, ring], { xPercent: -50, yPercent: -50 });
+  }
+
+  const moveDot = gsapApi
+    ? gsapApi.quickTo(dot, "x", { duration: 0.12, ease: "power3.out" })
+    : null;
+  const moveDotY = gsapApi
+    ? gsapApi.quickTo(dot, "y", { duration: 0.12, ease: "power3.out" })
+    : null;
+  const moveRing = gsapApi
+    ? gsapApi.quickTo(ring, "x", { duration: 0.34, ease: "power3.out" })
+    : null;
+  const moveRingY = gsapApi
+    ? gsapApi.quickTo(ring, "y", { duration: 0.34, ease: "power3.out" })
+    : null;
+
+  window.addEventListener("mousemove", (event) => {
+    dot.classList.add("is-visible");
+    ring.classList.add("is-visible");
+
+    if (gsapApi) {
+      moveDot(event.clientX);
+      moveDotY(event.clientY);
+      moveRing(event.clientX);
+      moveRingY(event.clientY);
+      return;
+    }
+
+    dot.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0) translate(-50%, -50%)`;
+    ring.style.transform = `translate3d(${event.clientX}px, ${event.clientY}px, 0) translate(-50%, -50%)`;
+  }, { passive: true });
+
+  document.querySelectorAll("a, button, input, select, textarea, .service-card, .package-card").forEach((item) => {
+    item.addEventListener("mouseenter", () => ring.classList.add("is-hovering"));
+    item.addEventListener("mouseleave", () => ring.classList.remove("is-hovering"));
+  });
+}
+
+function initGsapAnimations() {
+  const gsapApi = window.gsap;
+  if (!gsapApi || reducedMotion()) return;
+
+  if (window.ScrollTrigger) {
+    gsapApi.registerPlugin(window.ScrollTrigger);
+  }
+
+  gsapApi.from(".packages .section-kicker, .packages .section-heading", {
+    autoAlpha: 0,
+    y: 22,
+    duration: 0.7,
+    stagger: 0.08,
+    ease: "power3.out",
+    scrollTrigger: window.ScrollTrigger ? { trigger: ".packages", start: "top 78%" } : undefined
+  });
+
+  gsapApi.from(".package-card", {
+    autoAlpha: 0,
+    y: 34,
+    scale: 0.97,
+    duration: 0.78,
+    stagger: 0.1,
+    ease: "power3.out",
+    scrollTrigger: window.ScrollTrigger ? { trigger: ".package-grid", start: "top 82%" } : undefined
+  });
+
+  document.querySelectorAll(".package-card").forEach((card) => {
+    card.addEventListener("mousemove", (event) => {
+      const rect = card.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - 0.5;
+      const y = (event.clientY - rect.top) / rect.height - 0.5;
+      gsapApi.to(card, {
+        rotateX: y * -2,
+        rotateY: x * 2,
+        transformPerspective: 900,
+        duration: 0.35,
+        ease: "power3.out"
+      });
+    });
+
+    card.addEventListener("mouseleave", () => {
+      gsapApi.to(card, { rotateX: 0, rotateY: 0, duration: 0.45, ease: "power3.out" });
+    });
+  });
+}
+
 function initReveal() {
   const items = document.querySelectorAll(
     ".section-kicker, .section-heading, .service-card, .service-promise, .service-promise article, .showcase-card, .package-card, .finish-media, .finish-copy, .trust-intro, .trust-card, .quote-copy, .testimonial-stack article, .quote-card, .map-frame, .map-copy, .map-notes article, .faq-item"
@@ -215,4 +309,6 @@ initPackages();
 initFaq();
 initShowcaseVideos();
 initQuoteForm();
+initCustomCursor();
 initReveal();
+initGsapAnimations();
