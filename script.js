@@ -62,15 +62,27 @@ function accentTextNodes(text) {
   const tokens = text.match(/\s+|\S+/g) || [];
   let accentedWords = 0;
 
+  const pushAccent = (value) => {
+    const span = document.createElement("span");
+    span.className = accentedWords === 0 ? "accent-blue" : "accent-red";
+    span.textContent = value;
+    nodes.push(span);
+    accentedWords += 1;
+  };
+
   tokens.forEach((token) => {
     const isWord = /[A-Za-z0-9]/.test(token) && token !== "&";
+    const hyphenated = token.match(/^([A-Za-z0-9]+)-([A-Za-z0-9].*)$/);
 
     if (isWord && accentedWords < 2) {
-      const span = document.createElement("span");
-      span.className = accentedWords === 0 ? "accent-blue" : "accent-red";
-      span.textContent = token;
-      nodes.push(span);
-      accentedWords += 1;
+      if (hyphenated && accentedWords === 0) {
+        pushAccent(hyphenated[1]);
+        nodes.push(document.createTextNode("-"));
+        pushAccent(hyphenated[2]);
+        return;
+      }
+
+      pushAccent(token);
       return;
     }
 
@@ -101,7 +113,7 @@ function initHeadlineAccents() {
   document
     .querySelectorAll(
       ".brand-mark strong, #hero-title > span, main section h2, main section h3, .quote-card h3, .hero-badge-card h2"
-        + ", .preloader strong, .promise-panel strong, .faq-item button, .footer-brand p"
+        + ", .preloader strong, .promise-panel strong, .showcase-copy > span, .testimonial-stack small, .footer-brand p"
     )
     .forEach(accentHeadlineElement);
 }

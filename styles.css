@@ -1329,7 +1329,7 @@ ul {
 .showcase-copy span {
   display: inline-block;
   margin-bottom: 10px;
-  color: var(--gold);
+  color: var(--text);
   font-size: 0.78rem;
   font-weight: 900;
   letter-spacing: 0.14em;
@@ -1850,6 +1850,15 @@ a.showcase-card {
   text-transform: uppercase;
 }
 
+.showcase-copy span.headline-accented,
+.map-notes h3.headline-accented,
+.trust-card h3.headline-accented,
+.truck-service-grid h3.headline-accented,
+.service-card h3.headline-accented,
+.testimonial-stack small.headline-accented {
+  color: var(--text);
+}
+
 .quote-form {
   align-self: start;
 }
@@ -2318,16 +2327,23 @@ a.showcase-card {
 }
 
 @keyframes badgeGloss {
-  0%,
-  100% {
-    transform: translateX(-38%) rotate(7deg);
-    opacity: 0.48;
+  0% {
+    transform: translateX(-48%) rotate(7deg);
+    opacity: 0;
   }
 
-  48%,
-  58% {
-    transform: translateX(38%) rotate(7deg);
+  16% {
+    opacity: 0;
+  }
+
+  55% {
+    transform: translateX(44%) rotate(7deg);
     opacity: 0.92;
+  }
+
+  100% {
+    transform: translateX(56%) rotate(7deg);
+    opacity: 0;
   }
 }
 
