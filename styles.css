@@ -1864,6 +1864,25 @@ a.showcase-card {
   color: var(--text);
 }
 
+.headline-accented > .accent-blue,
+.headline-accented > .accent-red {
+  display: inline !important;
+  margin: 0 !important;
+  font: inherit !important;
+  letter-spacing: inherit !important;
+  line-height: inherit !important;
+  text-transform: inherit !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+.headline-accented > .accent-blue {
+  color: var(--blue) !important;
+}
+
+.headline-accented > .accent-red {
+  color: var(--red) !important;
+}
+
 .quote-form {
   align-self: start;
 }
