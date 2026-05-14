@@ -27,11 +27,18 @@
   </head>
   <body>
     <div class="preloader" data-preloader>
-      <div class="preloader-mark">
-        <img src="./assets/ProtectShineLOGO.jpg" alt="Protect & Shine Detailing logo" />
+      <div class="preloader-panel">
+        <div class="preloader-lights" aria-hidden="true">
+          <span></span>
+          <span></span>
+        </div>
+        <div class="preloader-mark">
+          <img src="./assets/ProtectShineLOGO.jpg" alt="Protect & Shine Detailing logo" />
+        </div>
+        <strong>Protect & Shine</strong>
+        <span class="preloader-tagline">Detailing the handoff</span>
+        <div class="preloader-progress" aria-hidden="true"><i></i></div>
       </div>
-      <strong>Protect & Shine</strong>
-      <span>Service you can trust</span>
     </div>
 
     <header class="site-header" data-header>
@@ -88,7 +95,7 @@
           </dl>
         </div>
 
-        <aside class="hero-badge-card" aria-label="Owner credibility">
+        <a class="hero-badge-card" href="https://www.instagram.com/protectandshinedetailing/" target="_blank" rel="noreferrer" aria-label="Open Protect and Shine Detailing on Instagram">
           <img src="./assets/ProtectShineLOGO.jpg" alt="Protect & Shine Detailing badge logo" />
           <div>
             <p>Built Different</p>
@@ -98,7 +105,7 @@
               vehicles, owner-operators, and fleets.
             </span>
           </div>
-        </aside>
+        </a>
       </section>
 
       <section class="signal-strip" aria-label="Protect & Shine service signals">
@@ -379,7 +386,7 @@
 
       <section class="section finish-section" id="semi">
         <div class="finish-media">
-          <video src="./Showcases/Truck.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Commercial truck detailing work"></video>
+          <video src="./TruckModified.mp4" autoplay muted loop playsinline preload="metadata" aria-label="Commercial truck detailing work"></video>
         </div>
         <div class="finish-copy">
           <p class="eyebrow">Semi Truck Detailing Services</p>
@@ -639,15 +646,22 @@
     </main>
 
     <footer class="site-footer">
-      <div>
+      <div class="footer-brand">
         <img src="./assets/ProtectShineLOGO.jpg" alt="Protect & Shine Detailing logo" />
         <p>Protect & Shine Detailing</p>
+        <a class="footer-instagram" href="https://www.instagram.com/protectandshinedetailing/" target="_blank" rel="noreferrer" aria-label="Protect and Shine Detailing Instagram">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <rect x="4" y="4" width="16" height="16" rx="5"></rect>
+            <circle cx="12" cy="12" r="3.4"></circle>
+            <circle cx="16.7" cy="7.3" r="0.9"></circle>
+          </svg>
+        </a>
       </div>
       <p class="made-by">Melissa, TX - Mobile vehicle and commercial truck detailing</p>
       <a class="footer-social" href="https://www.instagram.com/protectandshinedetailing/" target="_blank" rel="noreferrer">
         @protectandshinedetailing
       </a>
-      <p class="footer-credit">Made By Creative Webflow Co.</p>
+      <p class="footer-credit">Made By <span class="credit-creative">Creative</span> <span class="credit-webflow">Webflow Co.</span></p>
     </footer>
 
     <div class="sticky-book-bar">
