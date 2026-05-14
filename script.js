@@ -343,25 +343,6 @@ function initGsapAnimations() {
     gsapApi.registerPlugin(window.ScrollTrigger);
   }
 
-  gsapApi.from(".packages .section-kicker, .packages .section-heading", {
-    autoAlpha: 0,
-    y: 22,
-    duration: 0.7,
-    stagger: 0.08,
-    ease: "power3.out",
-    scrollTrigger: window.ScrollTrigger ? { trigger: ".packages", start: "top 78%" } : undefined
-  });
-
-  gsapApi.from(".package-card", {
-    autoAlpha: 0,
-    y: 34,
-    scale: 0.97,
-    duration: 0.78,
-    stagger: 0.1,
-    ease: "power3.out",
-    scrollTrigger: window.ScrollTrigger ? { trigger: ".package-grid", start: "top 82%" } : undefined
-  });
-
   document.querySelectorAll(".package-card").forEach((card) => {
     card.addEventListener("mousemove", (event) => {
       const rect = card.getBoundingClientRect();
@@ -383,9 +364,9 @@ function initGsapAnimations() {
 }
 
 function initReveal() {
-  const items = document.querySelectorAll(
+  const items = Array.from(document.querySelectorAll(
     ".section-kicker, .section-heading, .service-card, .service-promise, .service-promise article, .showcase-card, .package-card, .finish-media, .finish-copy, .trust-intro, .trust-card, .quote-copy, .testimonial-stack article, .quote-card, .map-frame, .map-copy, .map-notes article, .faq-item"
-  );
+  )).filter((item) => !item.closest(".packages"));
 
   if (!("IntersectionObserver" in window) || reducedMotion()) {
     items.forEach((item) => item.classList.add("is-visible"));
