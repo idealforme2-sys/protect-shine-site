@@ -121,6 +121,41 @@ function initFaq() {
   });
 }
 
+function initShowcaseVideos() {
+  const videos = document.querySelectorAll(".showcase-card video");
+  if (!videos.length) return;
+
+  const playVideo = (video) => {
+    video.muted = true;
+    video.playsInline = true;
+    video.play().catch(() => {});
+  };
+
+  const observer = "IntersectionObserver" in window
+    ? new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target;
+          if (entry.isIntersecting) {
+            playVideo(video);
+          } else {
+            video.pause();
+          }
+        });
+      }, { threshold: 0.18 })
+    : null;
+
+  videos.forEach((video) => {
+    video.addEventListener("stalled", () => {
+      video.load();
+      playVideo(video);
+    });
+    video.addEventListener("waiting", () => window.setTimeout(() => playVideo(video), 300));
+    video.closest(".showcase-card")?.addEventListener("mouseenter", () => playVideo(video));
+    observer?.observe(video);
+    playVideo(video);
+  });
+}
+
 function initQuoteForm() {
   const form = document.querySelector("[data-quote-form]");
   if (!form) return;
@@ -178,5 +213,6 @@ initHeader();
 initShowcases();
 initPackages();
 initFaq();
+initShowcaseVideos();
 initQuoteForm();
 initReveal();
