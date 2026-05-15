@@ -550,7 +550,7 @@ ul {
   min-height: clamp(660px, calc(100svh - 118px), 790px);
   align-items: center;
   margin-top: -104px;
-  padding: 122px 0 20px;
+  padding: 142px 0 0;
   overflow: hidden;
 }
 
@@ -851,7 +851,7 @@ ul {
   z-index: 5;
   overflow: hidden;
   width: 100%;
-  margin: -24px 0 18px;
+  margin: -24px 0 0;
   padding: 12px 0;
   border-block: 1px solid rgba(255, 255, 255, 0.1);
   background:
@@ -912,6 +912,10 @@ ul {
 
 .section {
   padding: 112px 0;
+}
+
+#services {
+  padding-top: 24px;
 }
 
 .packages {
