@@ -1,7 +1,7 @@
 const businessNumber = "9723385781";
 let selectedPackage = "Priority Detail";
 
-const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const reducedMotion = () => false;
 
 function smsHref(packageName) {
   const body = `Hi Protect & Shine Detailing, I'd like to book the ${packageName}.`;
