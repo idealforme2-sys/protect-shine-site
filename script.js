@@ -143,6 +143,7 @@ function initHeader() {
 
   const closeNav = () => {
     nav?.classList.remove("is-open");
+    document.body.style.overflow = "";
     toggle?.setAttribute("aria-expanded", "false");
     toggle?.setAttribute("aria-label", "Open navigation");
   };
@@ -154,6 +155,7 @@ function initHeader() {
 
   toggle?.addEventListener("click", () => {
     const isOpen = nav?.classList.toggle("is-open") || false;
+    document.body.style.overflow = isOpen ? "hidden" : "";
     toggle.setAttribute("aria-expanded", String(isOpen));
     toggle.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
   });
@@ -289,7 +291,8 @@ function initQuoteForm() {
 }
 
 function initCustomCursor() {
-  if (!window.matchMedia("(pointer: fine)").matches || reducedMotion()) return;
+  const isTouch = "ontouchstart" in window || navigator.maxTouchPoints > 0;
+  if (!window.matchMedia("(pointer: fine)").matches || isTouch) return;
 
   const dot = document.querySelector("[data-cursor-dot]");
   const ring = document.querySelector("[data-cursor-ring]");
