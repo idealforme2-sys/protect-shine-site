@@ -550,7 +550,7 @@ ul {
   min-height: clamp(660px, calc(100svh - 118px), 790px);
   align-items: center;
   margin-top: -104px;
-  padding: 142px 0 0;
+  padding: 132px 0 0;
   overflow: hidden;
 }
 
@@ -727,7 +727,7 @@ ul {
 .hero-badge-card {
   position: absolute;
   right: max(16px, calc(50% - 600px));
-  bottom: 18px;
+  bottom: 38px;
   z-index: 4;
   display: grid;
   grid-template-columns: 78px 1fr;
@@ -851,7 +851,7 @@ ul {
   z-index: 5;
   overflow: hidden;
   width: 100%;
-  margin: -24px 0 0;
+  margin: -14px 0 0;
   padding: 12px 0;
   border-block: 1px solid rgba(255, 255, 255, 0.1);
   background:
@@ -915,7 +915,7 @@ ul {
 }
 
 #services {
-  padding-top: 24px;
+  padding-top: 34px;
 }
 
 .packages {
