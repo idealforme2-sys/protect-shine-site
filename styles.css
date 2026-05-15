@@ -549,7 +549,7 @@ ul {
   display: grid;
   min-height: clamp(660px, calc(100svh - 118px), 790px);
   align-items: center;
-  margin-top: -86px;
+  margin-top: -104px;
   padding: 122px 0 20px;
   overflow: hidden;
 }
@@ -562,12 +562,12 @@ ul {
 }
 
 .hero-image {
-  inset: -6% -3% -8%;
-  width: 106%;
-  height: 114%;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   max-width: none;
   object-fit: cover;
-  object-position: center 18%;
+  object-position: center 65%;
   filter: saturate(0.84) contrast(1.12) brightness(0.9);
   animation: heroDrift 18s ease-in-out infinite alternate;
 }
@@ -847,9 +847,11 @@ ul {
 }
 
 .signal-strip {
+  position: relative;
+  z-index: 5;
   overflow: hidden;
   width: 100%;
-  margin: 0 0 18px;
+  margin: -24px 0 18px;
   padding: 12px 0;
   border-block: 1px solid rgba(255, 255, 255, 0.1);
   background:
@@ -2293,11 +2295,11 @@ a.showcase-card {
 
 @keyframes heroDrift {
   from {
-    transform: scale(1.03);
+    transform: scale(1);
   }
 
   to {
-    transform: scale(1.07) translate3d(0.2%, -0.7%, 0);
+    transform: scale(1.03) translate3d(0.2%, -0.3%, 0);
   }
 }
 
@@ -2580,9 +2582,9 @@ a.showcase-card {
   }
 
   .hero-image {
-    inset: -6% -18% -8%;
-    width: 136%;
-    height: 116%;
+    inset: -3% -10% -4%;
+    width: 120%;
+    height: 107%;
     object-position: center 20%;
   }
 
